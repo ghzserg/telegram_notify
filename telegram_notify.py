@@ -139,12 +139,20 @@ class TelegramNotify:
         self.server.add_warning(f"[telegram_notify]: {msg}")
 
     def _read_settings(self) -> configparser.ConfigParser:
-        settings = configparser.ConfigParser(interpolation=None)
+        # Comments at the end of a line, as in Moonraker's config
+        settings = configparser.ConfigParser(
+            interpolation=None, inline_comment_prefixes=("#", ";")
+        )
         try:
             with open(SETTINGS_FILE, encoding="utf-8") as f:
                 settings.read_file(f)
         except Exception as e:
-            self._warn(f"Unable to read {SETTINGS_FILE}: {e}")
+            # The error text would quote the line, maybe with the token
+            line = getattr(e, "lineno", None)
+            self._warn(
+                f"Unable to read {SETTINGS_FILE}: {type(e).__name__}"
+                + (f" in line {line}" if line else "")
+            )
             settings = configparser.ConfigParser(interpolation=None)
         if not settings.has_section("telegram_notify"):
             settings.add_section("telegram_notify")

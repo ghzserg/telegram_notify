@@ -12,16 +12,15 @@ LINK=/usr/data/zmod/moonraker/components/telegram_notify.py
 /opt/config/mod_data/plugins/telegram_notify/link.sh || exit 1
 echo "telegram_notify: Moonraker component link restored, restarting Moonraker"
 
+# One attempt with a timeout: this script holds Klipper's command queue.
+# When Moonraker is not running yet, it loads the component on its start.
 URL=http://127.0.0.1:7125/server/restart
-for i in 1 2 3; do
-    if [ -x "${CURL}" ]; then
-        "${CURL}" -s -f -X POST "${URL}" >/dev/null && exit 0
-    elif command -v curl >/dev/null; then
-        curl -s -f -X POST "${URL}" >/dev/null && exit 0
-    else
-        wget -q -O /dev/null --post-data= "${URL}" && exit 0
-    fi
-    sleep 10
-done
+if [ -x "${CURL}" ]; then
+    "${CURL}" -s -f -m 10 -X POST "${URL}" >/dev/null && exit 0
+elif command -v curl >/dev/null; then
+    curl -s -f -m 10 -X POST "${URL}" >/dev/null && exit 0
+else
+    wget -q -T 10 -O /dev/null --post-data= "${URL}" && exit 0
+fi
 echo "telegram_notify: restart Moonraker to enable the notifications"
 exit 0
