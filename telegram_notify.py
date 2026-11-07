@@ -57,7 +57,10 @@ class TelegramNotify:
         # moonraker.log and returns it from /server/config.
         settings = self._read_settings()
         opts = settings["telegram_notify"]
-        self.token = opts.get("bot_token", "").strip()
+        # Apprise urls have the token with a "bot" prefix
+        self.token = re.sub(
+            r"^bot", "", opts.get("bot_token", "").strip(), flags=re.I
+        )
         self.name = opts.get("name", "").strip()
         self.snapshot_url = opts.get(
             "snapshot_url", "http://127.0.0.1:8080/?action=snapshot"
