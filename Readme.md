@@ -4,6 +4,16 @@ A [zMod](https://github.com/ghzserg/zmod) plugin: print notifications to Telegra
 
 Moonraker sends the messages to the Telegram Bot API itself. Apprise loads all of its plugins and takes several megabytes of Moonraker's memory, which matters on printers with 128 MB of RAM.
 
+Moonraker memory (RssAnon) on a Flashforge AD5M with zMod:
+
+| | RssAnon |
+| :--- | ---: |
+| notify (Apprise) | 30.3 MB |
+| telegram_notify | 24.7 MB |
+| no notifications | 24.2 MB |
+
+About 5.6 MB less than with notify, the plugin itself adds about 0.5 MB.
+
 For Telegram it does what the [notify](https://github.com/ghzserg/notify) plugin does: notifications when a print starts, finishes, fails, is canceled, paused or resumed, messages from zMod (filament sensors, printer on), progress in percent, a webcam snapshot. Services other than Telegram are not supported, use notify for them.
 
 Do not enable notify and telegram_notify at the same time: the `_NOTIFY` macro works for only one of them.
