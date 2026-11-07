@@ -24,6 +24,13 @@ primary_branch: main
 
 Then run `ENABLE_PLUGIN name=telegram_notify`. The printer reboots.
 
+When switching from notify, disable it (`DISABLE_PLUGIN name=notify`) and remove your own `[notifier ...]` sections from `mod_data/user.moonraker.conf`, if any (e.g. `events: none` for events turned off). As long as the Moonraker config has a `[notifier ...]` section, Moonraker loads Apprise. A message of telegram_notify is turned off in `mod_data/telegram_notify.conf`:
+
+```
+[telegram_notify print_resumed]
+events: none
+```
+
 ## Settings
 
 1. Create a bot with [@BotFather](https://t.me/BotFather) and get its token.
@@ -43,7 +50,7 @@ body: Started {event_args[1].filename}
 photo: False
 ```
 
-A new message is added the same way, under a name of its own. Options: `events` (`started`, `complete`, `error`, `cancelled`, `paused`, `resumed` or `*` for all), `body` (a template as in Moonraker's `[notifier]`: `event_name`, `event_args`) and `photo`.
+A new message is added the same way, under a name of its own. Options: `events` (`started`, `complete`, `error`, `cancelled`, `paused`, `resumed`, `*` for all or `none` to turn the message off), `body` (a template as in Moonraker's `[notifier]`: `event_name`, `event_args`) and `photo`.
 
 ## Macros
 

@@ -117,6 +117,8 @@ class TelegramNotify:
         for msg in messages.values():
             events = JOB_EVENTS if "*" in msg.events else msg.events
             for event in events:
+                if event == "none":
+                    continue
                 if event not in JOB_EVENTS:
                     self._warn(
                         f"Unknown event '{event}' in [telegram_notify "

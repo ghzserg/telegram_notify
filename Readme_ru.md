@@ -24,6 +24,13 @@ primary_branch: main
 
 Затем выполните `ENABLE_PLUGIN name=telegram_notify`. Принтер перезагрузится.
 
+Если раньше использовался notify, выключите его (`DISABLE_PLUGIN name=notify`) и удалите из `mod_data/user.moonraker.conf` свои секции `[notifier ...]`, если они есть (например, `events: none` для отключённых событий). Пока в конфигурации Moonraker есть хоть одна секция `[notifier ...]`, он загружает Apprise. Отключить сообщение в telegram_notify можно в `mod_data/telegram_notify.conf`:
+
+```
+[telegram_notify print_resumed]
+events: none
+```
+
 ## Настройка
 
 1. Создайте бота у [@BotFather](https://t.me/BotFather) и получите токен.
@@ -43,7 +50,7 @@ body: Начата печать {event_args[1].filename}
 photo: False
 ```
 
-Новое сообщение добавляется так же, под своим именем. Параметры: `events` (`started`, `complete`, `error`, `cancelled`, `paused`, `resumed` или `*` для всех), `body` (шаблон, как в `[notifier]` Moonraker: `event_name`, `event_args`) и `photo`.
+Новое сообщение добавляется так же, под своим именем. Параметры: `events` (`started`, `complete`, `error`, `cancelled`, `paused`, `resumed`, `*` для всех или `none`, чтобы выключить сообщение), `body` (шаблон, как в `[notifier]` Moonraker: `event_name`, `event_args`) и `photo`.
 
 ## Макросы
 
