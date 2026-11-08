@@ -1,10 +1,10 @@
 # Telegram Notify
 
-Плагин [zMod](https://github.com/ghzserg/zmod): уведомления о печати в Telegram без библиотеки Apprise.
+Плагин [Z-Mod](https://github.com/ghzserg/zmod): уведомления о печати в Telegram без библиотеки Apprise.
 
 Moonraker сам отправляет сообщения в Telegram Bot API. Apprise загружает все свои плагины и занимает несколько мегабайт памяти Moonraker, а на принтерах со 128 МБ RAM каждый мегабайт заметен.
 
-Память Moonraker (RssAnon) на Flashforge AD5M с zMod:
+Память Moonraker (RssAnon) на Flashforge AD5M с Z-Mod:
 
 | | RssAnon |
 | :--- | ---: |
@@ -14,13 +14,13 @@ Moonraker сам отправляет сообщения в Telegram Bot API. Ap
 
 Экономия около 5.6 МБ по сравнению с notify, сам плагин добавляет около 0.5 МБ.
 
-Плагин умеет то же, что и [notify](https://github.com/ghzserg/notify/blob/main/Readme_ru.md) для Telegram: уведомления о старте, окончании, ошибке, отмене, паузе и продолжении печати, сообщения от zMod (датчики филамента, включение принтера), прогресс в процентах, снимок с камеры. Другие сервисы, кроме Telegram, не поддерживаются: для них используйте notify.
+Плагин умеет то же, что и [notify](https://github.com/ghzserg/notify/blob/main/Readme_ru.md) для Telegram: уведомления о старте, окончании, ошибке, отмене, паузе и продолжении печати, сообщения от Z-Mod (датчики филамента, включение принтера), прогресс в процентах, снимок с камеры. Другие сервисы, кроме Telegram, не поддерживаются: для них используйте notify.
 
 Не включайте notify и telegram_notify одновременно: макрос `_NOTIFY` будет работать только у одного из них.
 
 ## Установка
 
-Пока плагина нет в списке zMod, добавьте в `mod_data/user.moonraker.conf`:
+Пока плагина нет в списке Z-Mod, добавьте в `mod_data/user.moonraker.conf`:
 
 ```
 [update_manager telegram_notify]
@@ -65,9 +65,9 @@ photo: False
 ## Макросы
 
 - `TELEGRAM_NOTIFY MSG="текст" PHOTO=1` — отправить сообщение, `PHOTO=1` добавляет снимок с камеры.
-- `_NOTIFY MSG="текст" PHOTO=0 TYPE=...` — вызывается zMod, работает так же, как в notify.
+- `_NOTIFY MSG="текст" PHOTO=0 TYPE=...` — вызывается Z-Mod, работает так же, как в notify.
 
-Настройки zMod общие с notify:
+Настройки Z-Mod общие с notify:
 
 - `SAVE_VARIABLE VARIABLE=notify_percent VALUE=5` — уведомлять о прогрессе каждые 5 процентов (0 — выключить).
 - `SAVE_VARIABLE VARIABLE=notify_photo VALUE=0` — не отправлять снимки в сообщениях `_NOTIFY`.

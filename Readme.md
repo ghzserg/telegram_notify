@@ -1,10 +1,10 @@
 # Telegram Notify
 
-A [zMod](https://github.com/ghzserg/zmod) plugin: print notifications to Telegram without the Apprise library.
+A [Z-Mod](https://github.com/ghzserg/zmod) plugin: print notifications to Telegram without the Apprise library.
 
 Moonraker sends the messages to the Telegram Bot API itself. Apprise loads all of its plugins and takes several megabytes of Moonraker's memory, which matters on printers with 128 MB of RAM.
 
-Moonraker memory (RssAnon) on a Flashforge AD5M with zMod:
+Moonraker memory (RssAnon) on a Flashforge AD5M with Z-Mod:
 
 | | RssAnon |
 | :--- | ---: |
@@ -14,13 +14,13 @@ Moonraker memory (RssAnon) on a Flashforge AD5M with zMod:
 
 About 5.6 MB less than with notify, the plugin itself adds about 0.5 MB.
 
-For Telegram it does what the [notify](https://github.com/ghzserg/notify) plugin does: notifications when a print starts, finishes, fails, is canceled, paused or resumed, messages from zMod (filament sensors, printer on), progress in percent, a webcam snapshot. Services other than Telegram are not supported, use notify for them.
+For Telegram it does what the [notify](https://github.com/ghzserg/notify) plugin does: notifications when a print starts, finishes, fails, is canceled, paused or resumed, messages from Z-Mod (filament sensors, printer on), progress in percent, a webcam snapshot. Services other than Telegram are not supported, use notify for them.
 
 Do not enable notify and telegram_notify at the same time: the `_NOTIFY` macro works for only one of them.
 
 ## Installation
 
-Until the plugin is in the zMod plugin list, add to `mod_data/user.moonraker.conf`:
+Until the plugin is in the Z-Mod plugin list, add to `mod_data/user.moonraker.conf`:
 
 ```
 [update_manager telegram_notify]
@@ -65,9 +65,9 @@ A new message is added the same way, under a name of its own. Options: `events` 
 ## Macros
 
 - `TELEGRAM_NOTIFY MSG="text" PHOTO=1` — send a message, `PHOTO=1` adds a webcam snapshot.
-- `_NOTIFY MSG="text" PHOTO=0 TYPE=...` — called by zMod, works as in notify.
+- `_NOTIFY MSG="text" PHOTO=0 TYPE=...` — called by Z-Mod, works as in notify.
 
-zMod settings shared with notify:
+Z-Mod settings shared with notify:
 
 - `SAVE_VARIABLE VARIABLE=notify_percent VALUE=5` — progress every 5 percent (0 turns it off).
 - `SAVE_VARIABLE VARIABLE=notify_photo VALUE=0` — no snapshots in `_NOTIFY` messages.
